@@ -11,4 +11,5 @@ public interface VendedorDao {
     void excluir(Integer id);
     Vendedor buscarId(Integer id);
     List<Vendedor> buscarTodos();
+    List<Vendedor>buscarPorDepartamento(Departamento departamento);
 }
