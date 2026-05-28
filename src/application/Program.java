@@ -16,8 +16,14 @@ public class Program {
         Vendedor vendedor = vendedorDao.buscarId(3);
         System.out.println(vendedor);
 
-        System.out.println("\n===TESTE 2: VENDEDOR BUSCAR POR DEPARTAMENTO===");
+        System.out.println("\n===TESTE 2> VENDEDOR BUSCAR POR DEPARTAMENTO===");
         List<Vendedor> list = vendedorDao.buscarPorDepartamento(new Departamento(2,null));
+        for (Vendedor obj : list) {
+            System.out.println(obj);
+        }
+
+        System.out.println("\n===TESTE 3> VENDEDOR BUSCAR TODOS===");
+        list = vendedorDao.buscarTodos();
         for (Vendedor obj : list) {
             System.out.println(obj);
         }
