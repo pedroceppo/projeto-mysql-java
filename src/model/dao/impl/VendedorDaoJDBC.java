@@ -38,23 +38,17 @@ public class VendedorDaoJDBC implements VendedorDao {
         PreparedStatement st = null;
         ResultSet rs = null;
        try{
-          st = conn.prepareStatement("SELECT seller.*,department.Name as DepName" +
-                  "FROM seller INNER JOIN department" +
-                  "ON seller.DepartmentId = department.Id" +
-                  "WHERE seller.Id = ?");
+           st = conn.prepareStatement(
+                   "SELECT seller.*, department.Name as DepName " +
+                           "FROM seller INNER JOIN department " +
+                           "ON seller.DepartmentId = department.Id " +
+                           "WHERE seller.Id = ?"
+           );
           st.setInt(1,id);
           rs = st.executeQuery();
           if(rs.next()){
-              Departamento dep = new Departamento();
-              dep.setId(rs.getInt("DepartmentId"));
-              dep.setNome(rs.getString("DepName"));
-              Vendedor obj = new Vendedor();
-              obj.setId(rs.getInt("Id"));
-              obj.setNome(rs.getString("Name"));
-              obj.setEmail(rs.getString("Email"));
-              obj.setSalarioBase(rs.getDouble("BaseSalary"));
-              obj.setDataNascimento(rs.getDate("BirthDate"));
-              obj.setDepartamento(dep);
+              Departamento dep = instanciandoDepartamento(rs);
+              Vendedor obj = instanciandoVendedor(rs,dep);
               return obj;
           }
        }
@@ -66,6 +60,24 @@ public class VendedorDaoJDBC implements VendedorDao {
            DB.closeResultSet(rs);
        }
        return null;
+    }
+
+    private Vendedor instanciandoVendedor(ResultSet rs, Departamento dep) throws SQLException {
+        Vendedor obj = new Vendedor();
+        obj.setId(rs.getInt("Id"));
+        obj.setNome(rs.getString("Name"));
+        obj.setEmail(rs.getString("Email"));
+        obj.setSalarioBase(rs.getDouble("BaseSalary"));
+        obj.setDataNascimento(rs.getDate("BirthDate"));
+        obj.setDepartamento(dep);
+        return obj;
+    }
+
+    private Departamento instanciandoDepartamento(ResultSet rs) throws SQLException {
+        Departamento dep =  new Departamento();
+        dep.setId(rs.getInt("DepartmentId"));
+        dep.setNome(rs.getString("DepName"));
+        return dep;
     }
 
     @Override
