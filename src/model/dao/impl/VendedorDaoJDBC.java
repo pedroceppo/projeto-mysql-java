@@ -51,6 +51,10 @@ public class VendedorDaoJDBC implements VendedorDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
+        finally {
+            DB.closeResultSet(rs);
+            DB.closeStatement(st);
+        }
     }
 
 
@@ -164,6 +168,7 @@ public class VendedorDaoJDBC implements VendedorDao {
             while (rs.next()) {
                 Departamento dep = map.get(rs.getInt("DepartmentId"));
                 if(dep == null){
+                    dep = instanciandoDepartamento(rs);
                     map.put(rs.getInt("DepartmentId"),dep);
                 }
                 Vendedor obj = instanciandoVendedor(rs, dep);

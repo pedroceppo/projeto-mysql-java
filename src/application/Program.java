@@ -8,9 +8,11 @@ import model.entities.Vendedor;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         VendedorDao vendedorDao = FabricaDao.criarVendedorDao();
 
         System.out.println("=== TESTE 1> VENDEDOR BUSCAR ID===");
@@ -41,8 +43,9 @@ public class Program {
         System.out.println("Atualizado com sucesso!/Vendedor = " + attVendedor);
 
         System.out.println("\nTESTE 6> DELETAR VENDEDOR===");
-        Vendedor deletarVendedor = vendedorDao.buscarId(1);
-        vendedorDao.excluir(deletarVendedor.getId());
-        System.out.println("Vendedor Excluido!/Vendedor = " + deletarVendedor);
+        System.out.println("Digite o id do vendedor: ");
+        int id = sc.nextInt();
+        vendedorDao.excluir(id);
+        System.out.println("Vendedor deletado com sucesso!/Vendedor = " + id);
     }
 }
