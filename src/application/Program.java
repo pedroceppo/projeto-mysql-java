@@ -18,7 +18,7 @@ public class Program {
         System.out.println(vendedor);
 
         System.out.println("\n===TESTE 2> VENDEDOR BUSCAR POR DEPARTAMENTO===");
-        List<Vendedor> list = vendedorDao.buscarPorDepartamento(new Departamento(2,null));
+        List<Vendedor> list = vendedorDao.buscarPorDepartamento(new Departamento(2, null));
         for (Vendedor obj : list) {
             System.out.println(obj);
         }
@@ -30,8 +30,14 @@ public class Program {
         }
 
         System.out.println("\n===TESTE 4: INSERIR VENDEDOR===");
-        Vendedor novoVendedor = new Vendedor(null,"Greg","greg@gmail.com",new Date(),4000.00,new Departamento(2,null));
+        Vendedor novoVendedor = new Vendedor(null, "Greg", "greg@gmail.com", new Date(), 4000.00, new Departamento(2, null));
         vendedorDao.inserir(novoVendedor);
         System.out.println("Inserido com sucesso!/Novo id = " + novoVendedor.getId());
+
+        System.out.println("\nTESTE 5: ATUALIZAR VENDEDOR===");
+        Vendedor attVendedor = vendedorDao.buscarId(11);
+        attVendedor.setNome("José");
+        vendedorDao.atualizar(attVendedor);
+        System.out.println("Atualizado com sucesso!/Vendedor = " + attVendedor);
     }
 }
