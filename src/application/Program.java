@@ -6,6 +6,7 @@ import model.dao.impl.VendedorDaoJDBC;
 import model.entities.Departamento;
 import model.entities.Vendedor;
 
+import java.util.Date;
 import java.util.List;
 
 public class Program {
@@ -27,5 +28,10 @@ public class Program {
         for (Vendedor obj : list) {
             System.out.println(obj);
         }
+
+        System.out.println("\n===TESTE 4: INSERIR VENDEDOR===");
+        Vendedor novoVendedor = new Vendedor(null,"Greg","greg@gmail.com",new Date(),4000.00,new Departamento(2,null));
+        vendedorDao.inserir(novoVendedor);
+        System.out.println("Inserido com sucesso!/Novo id = " + novoVendedor.getId());
     }
 }
