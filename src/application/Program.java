@@ -29,15 +29,20 @@ public class Program {
             System.out.println(obj);
         }
 
-        System.out.println("\n===TESTE 4: INSERIR VENDEDOR===");
+        System.out.println("\n===TESTE 4> INSERIR VENDEDOR===");
         Vendedor novoVendedor = new Vendedor(null, "Greg", "greg@gmail.com", new Date(), 4000.00, new Departamento(2, null));
         vendedorDao.inserir(novoVendedor);
         System.out.println("Inserido com sucesso!/Novo id = " + novoVendedor.getId());
 
-        System.out.println("\nTESTE 5: ATUALIZAR VENDEDOR===");
+        System.out.println("\nTESTE 5> ATUALIZAR VENDEDOR===");
         Vendedor attVendedor = vendedorDao.buscarId(11);
         attVendedor.setNome("José");
         vendedorDao.atualizar(attVendedor);
         System.out.println("Atualizado com sucesso!/Vendedor = " + attVendedor);
+
+        System.out.println("\nTESTE 6> DELETAR VENDEDOR===");
+        Vendedor deletarVendedor = vendedorDao.buscarId(1);
+        vendedorDao.excluir(deletarVendedor.getId());
+        System.out.println("Vendedor Excluido!/Vendedor = " + deletarVendedor);
     }
 }
